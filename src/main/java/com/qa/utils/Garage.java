@@ -6,6 +6,19 @@ import com.qa.vehicles.Vehicle;
 
 public class Garage<T extends Vehicle> {
 	
+	private static Garage<?> instance = null;
+	
+	private Garage() {
+		
+	}
+	
+	public static Garage<?> getInstance() {
+		if(instance == null) {
+			instance = new Garage();
+		}
+		return instance;
+	}
+	
 	private ArrayList<T> garage = new ArrayList<T>();
 
 	public ArrayList<T> getGarage() {

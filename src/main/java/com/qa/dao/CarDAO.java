@@ -7,20 +7,20 @@ import com.qa.vehicles.Vehicle;
 
 public class CarDAO implements Dao {
 	
-	Garage garage = new Garage();
-
-	public Vehicle modelFromVehicle(Vehicle vehicle) {
-		
+	Garage<?> garage = Garage.getInstance();
+	
+	public Car modelFromVehicle(Vehicle vehicle) {
+		return (Car) vehicle;
 	}
 
-	public Vehicle create(Vehicle vehicle) {
+	public Car create(Vehicle vehicle) {
 		garage.insertGarage(vehicle);
-		return vehicle;
+		return ;
 	}
 
-	public Vehicle read(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Car read(int id) {
+		Vehicle vehicle = garage.read(id);
+		return modelFromVehicle(vehicle);
 	}
 
 	public List readAll() {
