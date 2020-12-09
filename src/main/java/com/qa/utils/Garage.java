@@ -4,59 +4,70 @@ import java.util.ArrayList;
 
 import com.qa.vehicles.Vehicle;
 
-public class Garage<T extends Vehicle> {
-	
-	private static Garage<?> instance = null;
-	
+public class Garage {
+
+	private static Garage instance = null;
+	private ArrayList<Vehicle> garage = new ArrayList<Vehicle>();
+
 	private Garage() {
-		
+
 	}
-	
-	public static Garage<?> getInstance() {
-		if(instance == null) {
+
+	public static Garage getInstance() {
+		if (instance == null) {
 			instance = new Garage();
 		}
 		return instance;
 	}
-	
-	private ArrayList<T> garage = new ArrayList<T>();
 
-	public ArrayList<T> getGarage() {
+	public ArrayList<Vehicle> getGarage() {
 		return garage;
 	}
-	
+
 	public void clearGarage() {
 		garage.clear();
 	}
+	
+	public int getSize() {
+		return garage.size();
+	}
 
-	public void insertGarage(T vehicle) {
+	public void insertGarage(Vehicle vehicle) {
 		garage.add(vehicle);
 	}
-	
+
 	public void removeByType(String type) {
 		garage.removeIf(vehicle -> vehicle.getType().equals(type));
 	}
-	
+
 	public void removeType(String type) {
-		for(int i = garage.size()-1; i>= 0; i--) {
-			if(garage.get(i).getType().equals(type)) {
+		for (int i = garage.size() - 1; i >= 0; i--) {
+			if (garage.get(i).getType().equals(type)) {
 				garage.remove(i);
 			}
 		}
 	}
-	
+
 	public void removeByID(int id) {
 		garage.removeIf(vehicle -> vehicle.getId() == id);
 	}
-	
-	public ArrayList<T> searchGarage(String type) {
-		ArrayList<T> found = new ArrayList<T>();
-		for(T vehicle: garage) {
-			if(vehicle.getType().equals(type)) {
+
+	public Vehicle findByID(int id) {
+		for (Vehicle v : garage) {
+			if (v.getId() == id) {
+				return v;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Vehicle> searchByType(String type) {
+		ArrayList<Vehicle> found = new ArrayList<Vehicle>();
+		for (Vehicle vehicle : garage) {
+			if (vehicle.getType().equals(type)) {
 				found.add(vehicle);
 			}
 		}
 		return found;
 	}
 }
-

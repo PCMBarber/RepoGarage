@@ -10,8 +10,6 @@ public interface GarageController<T extends Vehicle> {
 	
 	boolean delete();
 	
-	T read();
-	
 	List<T> readAll();
 	
 	T update();

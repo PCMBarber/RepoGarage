@@ -6,7 +6,7 @@ import com.qa.vehicles.Vehicle;
 
 public interface Dao<T extends Vehicle> {
 	
-	T modelFromVehicle(T vehicle);
+	T modelFromVehicle(Vehicle vehicle);
 	
 	T create(T vehicle);
 	

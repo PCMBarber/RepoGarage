@@ -45,6 +45,11 @@ public abstract class Vehicle {
 	}
 
 	@Override
+	public String toString() {
+		return "id=" + id + ", wheels=" + wheels + ", colour=" + colour + ", type=" + type;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

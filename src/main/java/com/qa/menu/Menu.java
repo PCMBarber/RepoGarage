@@ -2,45 +2,73 @@ package com.qa.menu;
 
 import com.qa.controllers.CarController;
 import com.qa.controllers.GarageController;
+import com.qa.dao.CarDAO;
 import com.qa.utils.UserInput;
 
 public class Menu {
-	
-	UserInput input = new UserInput();
-	
+
+	UserInput input = UserInput.getInstance();
+
 	GarageController<?> active;
 	CarController carController;
-	
+
 	public Menu() {
-		//initialise controllers and DAO's
-		carController = new CarController();
+		CarDAO carDAO = new CarDAO();
+		carController = new CarController(carDAO);
 	}
-	
+
 	public void start() {
-		System.out.println("(1) for Car");
-		System.out.println("(2) for Truck");
-		
-		int selection = input.getInt();
-		
-		switch(selection) {
-		case 1: active = carController;
+		boolean exit = false;
+		do {
+			System.out.println("1) Car");
+			System.out.println("2) Truck");
+			System.out.println("3) Exit");
+
+			int selection = input.getInt();
+
+			switch (selection) {
+			case 1:
+				active = carController;
 				action();
 				break;
-		case 2:
-		default:
-		}
+			case 2:
+				System.out.println("Unimplemented");
+				break;
+			case 3:
+				exit = true;
+			}
+		} while (!exit);
 	}
-	
+
 	public void action() {
-		System.out.println("what do you want to do?");
-		int selection = input.getInt();
-		
-		switch(selection) {
-		case 1: active.create();
-		case 2: active.delete();
-		case 3: active.read();
-		case 4: active.readAll();
-		}
+		boolean back = false;
+		do {
+			System.out.println("what do you want to do?");
+			System.out.println("1) Create");
+			System.out.println("2) Delete");
+			System.out.println("3) Read All");
+			System.out.println("4) Update");
+			System.out.println("5) Return");
+			
+			int selection = input.getInt();
+
+			switch (selection) {
+			case 1:
+				active.create();
+				break;
+			case 2:
+				active.delete();
+				break;
+			case 3:
+				active.readAll();
+				break;
+			case 4:
+				active.update();
+				break;
+			case 5:
+				back = true;
+			}
+		} while (!back);
 	}
 
 }
