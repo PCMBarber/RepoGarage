@@ -10,32 +10,35 @@ import com.qa.vehicles.Truck;
 public class TruckController implements GarageController<Truck> {
 	
 	private TruckDAO truckDAO;
-	private UserInput input = UserInput.getInstance();
+	private UserInput input;
 	
 	public TruckController(TruckDAO truckDAO) {
 		super();
+		this.input = UserInput.getInstance();
+		this.truckDAO = truckDAO;
+	}
+	
+	public TruckController(TruckDAO truckDAO, UserInput input) {
+		super();
+		this.input = input;
 		this.truckDAO = truckDAO;
 	}
 
-	@Override
 	public Truck create() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public boolean delete() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public List<Truck> readAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Truck update() {
 		// TODO Auto-generated method stub
 		return null;

@@ -9,14 +9,20 @@ import com.qa.vehicles.Car;
 public class CarController implements GarageController<Car> {
 	
 	private CarDAO carDAO;
-	private UserInput input = UserInput.getInstance();
+	private UserInput input;
 	
 	public CarController(CarDAO carDAO) {
 		super();
+		this.input = UserInput.getInstance();
 		this.carDAO = carDAO;
 	}
 	
-	@Override
+	public CarController(CarDAO carDAO, UserInput input) {
+		super();
+		this.input = input;
+		this.carDAO = carDAO;
+	}
+	
 	public Car create() {
 		System.out.println("How many wheels does the car have?");
 		int wheels = input.getInt();
@@ -31,7 +37,6 @@ public class CarController implements GarageController<Car> {
 		return carDAO.create(newCar);
 	}
 
-	@Override
 	public boolean delete() {
 		readAll();
 		System.out.println("ID of the car you wish to delete?");
@@ -39,7 +44,6 @@ public class CarController implements GarageController<Car> {
 		return carDAO.delete(id);
 	}
 
-	@Override
 	public List<Car> readAll() {
 		List<Car> all = carDAO.readAll();
 		for(Car car:all) {
@@ -48,7 +52,6 @@ public class CarController implements GarageController<Car> {
 		return all;
 	}
 
-	@Override
 	public Car update() {
 		readAll();
 		
