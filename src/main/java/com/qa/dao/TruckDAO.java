@@ -1,8 +1,10 @@
 package com.qa.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.qa.utils.Garage;
+import com.qa.vehicles.Car;
 import com.qa.vehicles.Truck;
 import com.qa.vehicles.Vehicle;
 
@@ -19,28 +21,42 @@ public class TruckDAO implements Dao<Truck> {
 	}
 	
 	public Truck modelFromVehicle(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Truck) vehicle;
 	}
 
 	public Truck create(Truck vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+		int before = garage.getSize();
+		garage.insertGarage(vehicle);
+		int after = garage.getSize();
+		if(before == after) {
+			System.out.println("Failed");
+			return null;
+		}
+		return vehicle;
 	}
 
 	public Truck read(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return modelFromVehicle(garage.findByID(id));
 	}
 
 	public List<Truck> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Vehicle> found = garage.searchByType("Truck");
+		List<Truck> trucks = new ArrayList<Truck>();
+		for(Vehicle v:found) {
+			trucks.add(modelFromVehicle(v));
+		}
+		return trucks;
 	}
 
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		int before = garage.getSize();
+		garage.removeByID(id);
+		int after = garage.getSize();
+		if(before == after) {
+			System.out.println("Failed");
+			return false;
+		}
+		return true;
 	}
 
 }
