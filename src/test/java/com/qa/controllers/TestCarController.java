@@ -31,8 +31,8 @@ public class TestCarController {
 	
 	@InjectMocks
 	private CarController carController;
-	//private doesn't really amke a difference in tests
-	//just goo practice init
+	//private doesn't really make a difference in tests
+	//just good practice init
 	
 	@Test
 	public void testCreate() {

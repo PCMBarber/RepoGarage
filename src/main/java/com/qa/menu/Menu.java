@@ -9,17 +9,26 @@ import com.qa.utils.UserInput;
 
 public class Menu {
 
-	UserInput input = UserInput.getInstance();
+	UserInput input;
 
 	GarageController<?> active;
 	CarController carController;
 	TruckController truckController;
+
+	public Menu(UserInput input, CarController carController,
+			TruckController truckController) {
+		super();
+		this.input = input;
+		this.carController = carController;
+		this.truckController = truckController;
+	}
 
 	public Menu() {
 		CarDAO carDAO = new CarDAO();
 		TruckDAO truckDAO = new TruckDAO();
 		carController = new CarController(carDAO);
 		truckController = new TruckController(truckDAO);
+		input = UserInput.getInstance();
 	}
 
 	public void start() {
