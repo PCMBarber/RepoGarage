@@ -16,6 +16,10 @@ public abstract class Vehicle {
 	
 	public abstract double calculateCost();
 
+	public static void setCount(int count) {
+		Vehicle.count = count;
+	}
+
 	public int getId() {
 		return id;
 	}

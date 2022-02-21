@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -128,5 +129,10 @@ public class TestCarController {
 		verify(carDAO, times(1)).create(newCar);
 		verify(input, times(3)).getInt();
 		verify(input, times(2)).getString();
+	}
+	
+	@After
+	public void cleanUp() {
+		Car.setCount(0);
 	}
 }

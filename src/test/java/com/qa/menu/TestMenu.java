@@ -57,13 +57,30 @@ public class TestMenu {
 		verify(truckController, times(1)).delete();
 	}
 	
+	@Test
+	public void testStartReadAll() {
+		// Given
+		when(input.getInt()).thenReturn(1, 3, 5, 3);
+		
+		// When
+		menu.start();
+		
+		// Then
+		verify(input, Mockito.times(4)).getInt();
+		verify(carController, times(1)).readAll();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void testStartUpdate() {
+		// Given
+		when(input.getInt()).thenReturn(2, 4, 5, 3);
+		
+		// When
+		menu.start();
+		
+		// Then
+		verify(input, times(4)).getInt();
+		verify(truckController, times(1)).update();
+	}
 	
 }
